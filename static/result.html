@@ -9,7 +9,7 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">asdfasdf</div>
+            <div class="logo">COLOR STUDIO</div>
             <div class="nav-buttons">
                 <a href="#" class="btn btn-outline">Sign Up</a>
                 <a href="#" class="btn btn-primary">Log In</a>
@@ -18,12 +18,15 @@
     </header>
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 70px; font-weight: 700; margin-bottom: 10px;">퍼스널 컬러 분석</h1>
+                <p style="font-size: 22px; color: #333;">당신의 사진으로 맞춤형 컬러 진단을 받아보세요.</p>
+            </div>
+            <div class="hero-content" style="display: flex; flex-direction: column; align-items: center; gap: 30px;">
                 <div class="hero-image">
                     <div class="mock-interface">
-
                         <div class="mock-content">
-                            <div id="imagePreview" style="height: 200px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #666; overflow: hidden; position: relative;">
+                            <div id="imagePreview" style="height: 350px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; color: #666; overflow: hidden; position: relative;">
                                 <div id="placeholderText">📸 분석할 사진을 업로드 해주세요!</div>
                                 <img id="previewImage" style="width: 100%; height: 100%; object-fit: cover; display: none; border-radius: 10px;" alt="Uploaded preview">
                             </div>
@@ -31,8 +34,6 @@
                     </div>
                 </div>
                 <div class="hero-text">
-                    <h1>퍼스널 컬러 분석</h1>
-                    <p>쉽고 빠르게 퍼스널 컬러를 분석해보세요.</p>
                     <div class="hero-form">
                         <input type="file" id="imageUpload" accept="image/*" style="display: none;">
                         <button type="button" class="image-upload-btn btn btn-outline " onclick="document.getElementById('imageUpload').click()">
@@ -40,9 +41,11 @@
                         </button>
                         <button class="btn btn-primary">분석 시작</button>
                     </div>
-                    <small>보다 정확한 결과를 위해 너무 어둡거나 밝은 사진은 피해주세요!<br>얼굴이 정확하게 보일 수록 정확도가 높아져요!</small>
+                    <small style="font-size: 18px; color: #555; display: block; text-align: center; margin-top: 15px;">
+                        보다 정확한 결과를 위해 너무 어둡거나 밝은 사진은 피해주세요!<br>
+                        얼굴이 정확하게 보일수록 정확도가 높아져요!
+                    </small>
                 </div>
-                
             </div>
         </div>
     </section>
