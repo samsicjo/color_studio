@@ -1,0 +1,33 @@
+2025-06-15 07:39:58,686 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:39:58,687 - WARNING - Retrying in 1s [Retry 1/5].
+2025-06-15 07:39:59,772 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:39:59,775 - WARNING - Retrying in 2s [Retry 2/5].
+2025-06-15 07:40:01,841 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:40:01,847 - WARNING - Retrying in 4s [Retry 3/5].
+2025-06-15 07:40:05,932 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:40:05,935 - WARNING - Retrying in 8s [Retry 4/5].
+2025-06-15 07:40:14,050 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:40:14,052 - WARNING - Retrying in 8s [Retry 5/5].
+2025-06-15 07:40:22,140 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json
+2025-06-15 07:40:22,243 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:22,248 - WARNING - Retrying in 1s [Retry 1/5].
+2025-06-15 07:40:23,367 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:23,368 - WARNING - Retrying in 2s [Retry 2/5].
+2025-06-15 07:40:25,520 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:25,523 - WARNING - Retrying in 4s [Retry 3/5].
+2025-06-15 07:40:29,614 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:29,615 - WARNING - Retrying in 8s [Retry 4/5].
+2025-06-15 07:40:37,705 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:37,706 - WARNING - Retrying in 8s [Retry 5/5].
+2025-06-15 07:40:45,796 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:45,900 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:45,902 - WARNING - Retrying in 1s [Retry 1/5].
+2025-06-15 07:40:47,028 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:47,031 - WARNING - Retrying in 2s [Retry 2/5].
+2025-06-15 07:40:49,176 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:49,178 - WARNING - Retrying in 4s [Retry 3/5].
+2025-06-15 07:40:53,275 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:40:53,278 - WARNING - Retrying in 8s [Retry 4/5].
+2025-06-15 07:41:01,338 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
+2025-06-15 07:41:01,341 - WARNING - Retrying in 8s [Retry 5/5].
+2025-06-15 07:41:09,418 - WARNING - HTTP Error 429 thrown while requesting HEAD https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json

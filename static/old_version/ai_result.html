@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼스널 컬러 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .upload-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4ecdc4;
+            color: white;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .file-input-label:hover {
+            background: #45b7aa;
+            transform: translateY(-2px);
+        }
+
+        .analyze-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 15px 40px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .analyze-btn.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .analyze-btn:hover.active {
+            background: #ee5a24;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .color-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .color-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+        }
+
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            border: 3px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .color-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: capitalize;
+        }
+
+        .color-code {
+            font-family: monospace;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .analysis-results {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #4ecdc4;
+        }
+
+        .analysis-results h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .analysis-text {
+            line-height: 1.6;
+            color: #555;
+            white-space: pre-wrap;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4ecdc4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .preview-image {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 15px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 퍼스널 컬러 분석</h1>
+            <p>당신의 사진으로 맞춤형 컬러 진단을 받아보세요</p>
+        </div>
+
+        <div class="content">
+            <div class="upload-section">
+                <div class="file-input-wrapper">
+                    <input type="file" id="imageInput" class="file-input" accept="image/*">
+                    <label for="imageInput" class="file-input-label">📷 사진 선택하기</label>
+                </div>
+                <div id="imagePreview"></div>
+                <button id="analyzeBtn" class="analyze-btn">🔍 퍼스널 컬러 분석하기</button>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>얼굴 색상을 분석하고 있어요...</p>
+            </div>
+
+            <div id="results" class="results" style="display: none;">
+                <div id="colorResults" class="color-results"></div>
+                <div id="analysisResults" class="analysis-results" style="display: none;">
+                    <h3>✨ 퍼스널 컬러 분석 결과</h3>
+                    <div id="analysisText" class="analysis-text"></div>
+                </div>
+            </div>
+
+            <div id="error" class="error" style="display: none;"></div>
+        </div>
+    </div>
+
+
+    
+<!--------------------------------------------------------------------------------------------------------------------------->
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const imagePreview = document.getElementById('imagePreview');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const colorResults = document.getElementById('colorResults');
+        const analysisResults = document.getElementById('analysisResults');
+        const analysisText = document.getElementById('analysisText');
+        const errorDiv = document.getElementById('error');
+
+        let selectedFile = null;
+        let extractedColors = null;
+
+        // 파일 선택 시
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFile = file;
+                
+                // 이미지 미리보기
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imagePreview.innerHTML = `<img src="${e.target.result}" class="preview-image" alt="선택된 이미지">`;
+                };
+                reader.readAsDataURL(file);
+                
+                // 분석 버튼 활성화
+                analyzeBtn.classList.add('active');
+            }
+        });
+
+        // 분석 버튼 클릭
+        analyzeBtn.addEventListener('click', async function() {
+            if (!selectedFile) return;
+
+            try {
+                hideError();
+                showLoading();
+                hideResults();
+
+                // 통합 분석 (색상 추출 + 퍼스널 컬러 분석)
+                await analyzeAll();
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('분석 중 오류가 발생했습니다: ' + error.message);
+            } finally {
+                hideLoading();
+            }
+        });
+
+        // 통합 분석 함수
+        async function analyzeAll() {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            const response = await fetch('/personal/analyze-all', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('분석에 실패했습니다');
+            }
+
+            const result = await response.json();
+            
+            if (result.status === 'error') {
+                throw new Error(result.analysis);
+            }
+
+            // 색상 결과 표시
+            displayColorResults(result.face_colors);
+            
+            // 분석 결과 표시
+            displayAnalysisResults(result.analysis);
+        }
+
+        // 기존 함수들 (필요시 개별 호출용으로 유지)
+        async function extractFaceColors() {
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            const response = await fetch('/personal/facecolor', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('색상 추출에 실패했습니다');
+            }
+
+            extractedColors = await response.json();
+            displayColorResults(extractedColors);
+        }
+
+        async function analyzePersonalColor() {
+            const response = await fetch('/personal/analyze-all', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(extractedColors)
+            });
+
+            if (!response.ok) {
+                throw new Error('퍼스널 컬러 분석에 실패했습니다');
+            }
+
+            const analysis = await response.json();
+            displayAnalysisResults(analysis.analysis);
+        }
+
+        // 색상 결과 표시
+        function displayColorResults(colors) {
+            const colorNames = {
+                eyes: '눈',
+                nose: '코',
+                lips: '입술', 
+                hair: '머리',
+                skin: '피부'
+            };
+
+            colorResults.innerHTML = '';
+            
+            Object.entries(colors).forEach(([part, color]) => {
+                const colorItem = document.createElement('div');
+                colorItem.className = 'color-item';
+                colorItem.innerHTML = `
+                    <div class="color-box" style="background-color: #${color};"></div>
+                    <div class="color-name">${colorNames[part]}</div>
+                    <div class="color-code">#${color}</div>
+                `;
+                colorResults.appendChild(colorItem);
+            });
+
+            showResults();
+        }
+
+        // 분석 결과 표시
+        function displayAnalysisResults(analysis) {
+            analysisText.textContent = analysis;
+            analysisResults.style.display = 'block';
+        }
+
+        // UI 상태 관리
+        function showLoading() {
+            loading.style.display = 'block';
+        }
+
+        function hideLoading() {
+            loading.style.display = 'none';
+        }
+
+        function showResults() {
+            results.style.display = 'block';
+        }
+
+        function hideResults() {
+            results.style.display = 'none';
+            analysisResults.style.display = 'none';
+        }
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            errorDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html> 

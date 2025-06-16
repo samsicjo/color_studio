@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ff9ec500, #ffa8cc, #ffb3d1);
+            min-height: 100vh;
+        }
+
+        /* 헤더 */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* 히어로 섹션 */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, #ff9ec500, #ffa8cc00, #ffb3d100);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            transform: perspective(500px) rotateX(15deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .color-text {
+            color: #4ecdc4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .studio-text {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            background: linear-gradient(45deg, #4ecdc4, #45b7b8);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* 3D 장식 요소들 */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            animation: float-random 8s ease-in-out infinite;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            background: rgba(78, 205, 196, 0.2);
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 215, 0, 0.2);
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        /* 서비스 섹션 */
+        .services {
+            padding: 5rem 2rem;
+            background: #fff;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #4ecdc4, #ffd700);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(45deg, #ff9ec5, #4ecdc4, #ffd700);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #ff9ec5, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 포트폴리오 섹션 */
+        .portfolio {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .portfolio-item {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:nth-child(1) { background: linear-gradient(45deg, #ff9ec5, #ffa8cc); }
+        .portfolio-item:nth-child(2) { background: linear-gradient(45deg, #4ecdc4, #45b7b8); }
+        .portfolio-item:nth-child(3) { background: linear-gradient(45deg, #ffd700, #ffed4e); }
+        .portfolio-item:nth-child(4) { background: linear-gradient(45deg, #a8e6cf, #88d8c0); }
+        .portfolio-item:nth-child(5) { background: linear-gradient(45deg, #ffb3ba, #ffcccb); }
+        .portfolio-item:nth-child(6) { background: linear-gradient(45deg, #c7ceea, #b5c7f0); }
+
+        .portfolio-item:hover {
+            transform: scale(1.05);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-text {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* 푸터 */
+        .footer {
+            background: #333;
+            color: #fff;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #4ecdc4;
+        }
+
+        /* 애니메이션 */
+        @keyframes float {
+            0%, 100% { transform: perspective(500px) rotateX(15deg) translateY(0px); }
+            50% { transform: perspective(500px) rotateX(15deg) translateY(-20px); }
+        }
+
+        @keyframes float-random {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0,0,0,0.9);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body style="background-image: url('/static/studio_image.jpg'); background-size: contain; background-repeat: no-repeat;">
+    <!-- 헤더 -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">COLOR STUDIO</div>
+            <ul class="nav-links">
+                <li><a href="#home">홈</a></li>
+                <li><a href="#services">서비스</a></li>
+                <li><a href="#portfolio">포트폴리오</a></li>
+                <li><a href="#contact">연락처</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero" id="home">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content" style="position: absolute; top: 35rem;">
+            <h1 class="hero-title">
+                <!-- <span class="color-text">COLOR</span><br>
+                <span class="studio-text">STUDIO</span> -->
+            </h1>
+            <p class="hero-subtitle">최신 AI 기술을 이용한 퍼스널 컬러 분석으로 당신을 빛내드립니다</p>
+            <button id="startBtn" class="cta-button" onclick="scrollToSection('services')">시작하기</button>
+        </div>
+    </section>
+
+    <!-- 서비스 섹션 -->
+    <section class="services" id="services" style="height: 200vh; min-height: 1400px;">
+        <div class="container">
+            <h2 class="section-title">우리의 서비스</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3 class="service-title">언제 어디서나 간편하게</h3>
+                    <p class="service-description">시간과 장소의 제약 없이 언제 어디서든 스마트폰이나 PC를 통해 간편하게 퍼스널 컬러를 진단받을 수 있습니다. 복잡한 예약이나 방문 없이, 몇 번의 클릭만으로 나만의 퍼스널 컬러를 발견하고 즉시 활용 가능한 스타일링 가이드를 받아보세요.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3 class="service-title">사진 업로드로 간편한 분석</h3>
+                    <p class="service-description">단순히 사진을 업로드하면 AI가 자동으로 당신의 퍼스널 컬러를 분석합니다. 복잡한 과정 없이 몇 초 만에 결과를 확인하세요.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🖌️</div>
+                    <h3 class="service-title">정확한 4계절 컬러 진단</h3>
+                    <p class="service-description">봄, 여름, 가을, 겨울 중 당신에게 가장 어울리는 컬러 톤을 정확하게 분석하여 맞춤형 컬러 팔레트를 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 포트폴리오 섹션 -->
+    <!-- <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">포트폴리오</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">핑크 드림<br>브랜딩 프로젝트</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">오션 블루<br>웹 디자인</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">골든 선샤인<br>패키지 디자인</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">민트 프레시<br>인테리어 컨설팅</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">코랄 붐<br>광고 캠페인</div>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-overlay">
+                        <div class="portfolio-text">라벤더 스카이<br>앱 UI 디자인</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- 푸터 -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#home">홈</a>
+                <a href="#services">서비스</a>
+                <a href="#portfolio">포트폴리오</a>
+                <a href="mailto:info@colorstudio.com">이메일</a>
+                <a href="tel:+82-10-1234-5678">전화</a>
+            </div>
+            <p>&copy; 2025 Color Studio. 모든 권리 보유.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 모바일 메뉴 토글
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // 네비게이션 링크 클릭 시 메뉴 닫기
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 스크롤 이벤트로 헤더 스타일 변경
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.8)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // 부드러운 스크롤 함수
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const elementPosition = element.offsetTop - headerHeight;
+
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // 스크롤 애니메이션
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 애니메이션할 요소들 관찰
+        document.querySelectorAll('.service-card, .portfolio-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // 마우스 이동에 따른 3D 효과
+        document.addEventListener('mousemove', (e) => {
+            const heroTitle = document.querySelector('.hero-title');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            const rotateX = (mouseY - 0.5) * 20;
+            const rotateY = (mouseX - 0.5) * 20;
+            
+            heroTitle.style.transform = `perspective(1000px) rotateX(${15 + rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // 색상 변경 애니메이션
+        setInterval(() => {
+            const shapes = document.querySelectorAll('.shape');
+            shapes.forEach(shape => {
+                const colors = [
+                    'rgba(255, 158, 197, 0.2)',
+                    'rgba(78, 205, 196, 0.2)',
+                    'rgba(255, 215, 0, 0.2)',
+                    'rgba(168, 230, 207, 0.2)',
+                    'rgba(255, 179, 186, 0.2)'
+                ];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                shape.style.background = randomColor;
+            });
+        }, 3000);
+
+        //페이지 로드 애니메이션
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transition = 'opacity 0.5s ease';
+        });
+
+        // 초기 불투명도 설정
+        document.body.style.opacity = '0';
+        document.getElementById("startBtn").addEventListener("click", () => {
+            window.location.href = "/personal_color_analysis";
+        });
+    </script>
+</body>
+</html>

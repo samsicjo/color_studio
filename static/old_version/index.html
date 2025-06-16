@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼컬페이스 - AI 모델 트레이닝 솔루션</title>
+</head>
+<body class="index-reset index-body">
+    <header class="index-header">
+        <nav class="index-nav">
+            <div class="index-nav__logo">퍼컬페이스</div>
+            <ul class="index-nav__links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#get-started" class="index-nav__start-btn">Get Started</a>
+            <div class="index-nav__hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+        <div class="index-mobile-menu" id="mobileMenu">
+            <a href="#home" onclick="closeMobileMenu()">Home</a>
+            <a href="#about" onclick="closeMobileMenu()">About</a>
+            <a href="#solution" onclick="closeMobileMenu()">Solution</a>
+            <a href="#blog" onclick="closeMobileMenu()">Blog</a>
+            <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="index-hero" id="home">
+            <div class="index-hero__content">
+                <h1>퍼컬페이스에 오신걸 환영합니다</h1>
+                <p>사진을 업로드 하시면 펄스널 컬러 분석을 해드립니다.</p>
+                <button id="startBtn" class="index-hero__cta">Get Started</button><!--  onclick="window.location.href='/templates/result.html'" -->
+            </div>
+            <div class="index-sphere-container">
+                <div class="index-sphere"></div>
+            </div>
+        </section>
+
+        <section class="index-section index-fade-in" id="solution">
+            <div class="index-section__header">
+                <span class="index-section__tag">WHAT WE DO</span>
+                <h2>Your AI models deserve better</h2>
+                <p class="index-section__description">
+                    Building AI is challenging, but it shouldn't be a roadblock. We solve the biggest hurdles in AI training—so you can focus on innovation, not limitations.
+                </p>
+            </div>
+            
+            <div class="index-cards-grid">
+                <div class="index-card index-fade-in">
+                    <div class="index-card__icon">📸</div>
+                    <h3>사진 업로드로 간편한 분석</h3>
+                    <p>단순히 사진을 업로드하면 AI가 자동으로 당신의 퍼스널 컬러를 분석합니다. 복잡한 과정 없이 몇 초 만에 결과를 확인하세요.</p>
+                </div>
+                
+                <div class="index-card index-fade-in">
+                    <div class="index-card__icon">🎨</div>
+                    <h3>정확한 4계절 컬러 진단</h3>
+                    <p>봄, 여름, 가을, 겨울 중 당신에게 가장 어울리는 컬러 톤을 정확하게 분석하여 맞춤형 컬러 팔레트를 제공합니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/script.js">        
+    </script>
+</body>
+</html>

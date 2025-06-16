@@ -1,0 +1,99 @@
+/* 기존 mock-interface 스타일 수정 */
+.mock-interface {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    color: #333;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    min-height: 280px; /* 최소 높이 설정 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 이미지 미리보기 컨테이너 수정 */
+#imagePreview {
+    background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #666;
+    overflow: hidden;
+    position: relative;
+    /* 고정 높이 제거하고 동적 높이 적용 */
+    min-height: 200px;
+    max-height: 400px;
+    width: 100%;
+    flex: 1;
+}
+
+/* 업로드된 이미지 스타일 개선 */
+#previewImage {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* cover에서 contain으로 변경하여 전체 이미지 표시 */
+    border-radius: 10px;
+    display: none;
+    /* 이미지 중앙 정렬 */
+    margin: auto;
+}
+
+/* 플레이스홀더 텍스트 스타일 */
+#placeholderText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+}
+
+/* hero-image 컨테이너 자체도 더 유연하게 */
+.hero-image {
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    /* 높이를 자동으로 조정 */
+    min-height: 350px;
+    display: flex;
+    align-items: stretch;
+}
+
+/* 반응형 처리 */
+@media (max-width: 768px) {
+    .hero-image {
+        min-height: 300px;
+        padding: 20px;
+    }
+    
+    #imagePreview {
+        min-height: 150px;
+        max-height: 300px;
+    }
+    
+    #placeholderText {
+        font-size: 16px;
+    }
+}
+
+/* 이미지가 로드되었을 때 애니메이션 효과 */
+@keyframes imageLoad {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#previewImage.loaded {
+    animation: imageLoad 0.3s ease-out;
+}

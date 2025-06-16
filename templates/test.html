@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <title>퍼스널 컬러</title>
+
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">조삼식</div>
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-outline">Sign Up</a>
+                <a href="#" class="btn btn-primary">Log In</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>퍼스널 컬러</h1>
+                    <p>쉽고 빠르게 확인하세요.</p>
+                    <div class="hero-form">
+                        <div> 
+                        <label for="inputBtn" class="btn btn-primary image-upload-btn" >
+                            이미지 업로드
+                            <input id="inputBtn" type="file" placeholder="Enter your work image" accept="image/*" >
+                        </label>
+                        </div>
+                        <button class="btn btn-primary">분석 시작</button>
+                    </div>
+                    <small>쉽고 빠르게 퍼스널 컬러를</small>
+                </div>
+                <div class="hero-image">
+                    <div class="mock-interface">
+                        <div class="mock-header">
+                            <div class="mock-tabs">
+                                <div class="mock-tab active" data-tab="dashboard">Dashboard</div>
+                                <div class="mock-tab" data-tab="projects">Projects</div>
+                                <div class="mock-tab" data-tab="goals">Goals</div>
+                            </div>
+                        </div>
+                        <div class="mock-content">
+                            <div id="imagePreview" style="height: 200px; background: linear-gradient(45deg, #f0f0f0, #e0e0e0); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #666; overflow: hidden; position: relative;">
+                                <div id="placeholderText">📸 Upload an image to see it here</div>
+                                <img id="previewImage" style="width: 100%; height: 100%; object-fit: cover; display: none; border-radius: 10px;" alt="Uploaded preview">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ai-section">
+        <div class="container">
+            <div class="ai-content">
+                <div class="ai-text">
+                    <span style="background: #7b68ee; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px;">NEW</span>
+                    <h2>Say Hi to <span style="color: #7b68ee;">ClickUp AI</span></h2>
+                    <p>Meet the only AI Assistant that's connected to all your work. Write smarter, work better, and be more productive.</p>
+                    <div class="ai-features">
+                        <div class="ai-feature">Write with AI</div>
+                        <div class="ai-feature">Summarize this</div>
+                        <div class="ai-feature">Continue writing</div>
+                        <div class="ai-feature">Brainstorm</div>
+                        <div class="ai-feature">Make it better</div>
+                        <div class="ai-feature">Generate action items</div>
+                        <div class="ai-feature">Use simpler language</div>
+                        <div class="ai-feature">Fix spelling and grammar</div>
+                        <div class="ai-feature">Make shorter</div>
+                        <div class="ai-feature">Make longer</div>
+                    </div>
+                    <button class="btn btn-primary">Discover What's New</button>
+                </div>
+                <div class="ai-demo">
+                    <h3>🤖 AI Assistant</h3>
+                    <p>Ready to help with your tasks and projects</p>
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; background: rgba(255,255,255,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">🎯</div>
+                            <div>
+                                <div style="font-weight: bold;">ClickUp AI</div>
+                                <div style="font-size: 14px; opacity: 0.8;">How can I help you today?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="simplify-section">
+        <div class="container">
+            <div class="simplify-content">
+                <div class="simplify-text">
+                    <h2>Simplify work and get more done.</h2>
+                    <p>Plan, track, and manage any type of work with project management that flexes to your team's needs.</p>
+                    <p><strong>REPLACES:</strong> Asana | Monday | Jira</p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+                <div class="task-list">
+                    <div class="task-item">
+                        <div class="task-status completed">✓</div>
+                        <div>
+                            <div style="font-weight: 500;">Task list template</div>
+                            <div style="font-size: 14px; color: #666;">Sarah • Marketing</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-status pending">⏳</div>
+                        <div>
+                            <div style="font-weight: 500;">Website redesign</div>
+                            <div style="font-size: 14px; color: #666;">John • Design</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-status">📝</div>
+                        <div>
+                            <div style="font-weight: 500;">Content strategy</div>
+                            <div style="font-size: 14px; color: #666;">Mike • Content</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-status">🎯</div>
+                        <div>
+                            <div style="font-weight: 500;">Performance review</div>
+                            <div style="font-size: 14px; color: #666;">Team • HR</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="docs-section">
+        <div class="container">
+            <div class="docs-content">
+                <div class="docs-demo">
+                    <div class="doc-toolbar">
+                        <button class="toolbar-btn">📝</button>
+                        <button class="toolbar-btn">📊</button>
+                        <button class="toolbar-btn">🔗</button>
+                        <button class="toolbar-btn">🎨</button>
+                        <button class="toolbar-btn">📷</button>
+                        <button class="toolbar-btn">🎤</button>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; min-height: 300px;">
+                        <h3 style="color: #333; margin-bottom: 15px;">Project Documentation</h3>
+                        <div style="display: flex; gap: 20px;">
+                            <div style="flex: 1;">
+                                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                    <div style="font-weight: 500; margin-bottom: 5px;">📋 Project Overview</div>
+                                    <div style="font-size: 14px; color: #666;">Complete project documentation</div>
+                                </div>
+                                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                    <div style="font-weight: 500; margin-bottom: 5px;">⚡ Quick Start</div>
+                                    <div style="font-size: 14px; color: #666;">Get started in minutes</div>
+                                </div>
+                                <div style="background: #d4edda; padding: 15px; border-radius: 8px;">
+                                    <div style="font-weight: 500; margin-bottom: 5px;">✅ Best Practices</div>
+                                    <div style="font-size: 14px; color: #666;">Follow our recommendations</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="docs-text">
+                    <h2>The world's most powerful (and fun) Docs.</h2>
+                    <p>Create beautiful documents with rich formatting, embed anything, and collaborate in real-time.</p>
+                    <button class="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Product</h3>
+                    <a href="#">Features</a>
+                    <a href="#">Pricing</a>
+                    <a href="#">Templates</a>
+                    <a href="#">Integrations</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <a href="#">About</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Press</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <a href="#">Help Center</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Community</a>
+                    <a href="#">API</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Security</a>
+                    <a href="#">GDPR</a>
+                </div>
+            </div>
+            <div style="text-align: center; padding-top: 20px; border-top: 1px solid #555;">
+                <p>&copy; 2024 ClickUp. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="test.js">        
+    </script>
+</body>
+</html>
